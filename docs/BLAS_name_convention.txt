@@ -1,0 +1,75 @@
+BLAS Routine Naming Conventions
+
+---Copy from the documentation of Intel MKL---
+
+BLAS routine names have the following structure:
+
+? <name> <mod> ( )
+
+The ? field indicates the data type:
+
+s              real, single precision
+c              complex, single precision
+d              real, double precision
+z              complex, double precision
+
+Some routines and functions can have combined character codes, such as sc or dz. For example, the function scasum uses a complex input array and returns a real value.
+
+The parts of the name have different interpretations in BLAS levels 1, 2, and 3.
+
+BLAS Level 2 Naming Conventions
+<name>
+ge              general matrix
+gb              general band matrix
+sy              symmetric matrix
+sp              symmetric matrix (packed storage)
+sb              symmetric band matrix
+he              Hermitian matrix
+hp              Hermitian matrix (packed storage)
+hb              Hermitian band matrix
+tr              triangular matrix
+tp              triangular matrix (packed storage)
+tb              triangular band matrix.
+<mod>
+The <name> field, in BLAS level 1, indicates the operation type. For example, the BLAS level 1 routines ?dot, ?rot, ?swap compute a vector dot product, vector rotation, and vector swap, respectively.
+
+In BLAS level 2 and 3, <name> reflects the matrix argument type:
+
+The <mod> field, if present, provides additional details of the operation. BLAS level 1 names can have the following characters in the <mod> field:
+
+c               conjugated vector
+u               unconjugated vector
+g               Givens rotation construction
+m               modified Givens rotation
+mg              modified Givens rotation construction
+
+BLAS level 2 names can have the following characters in the <mod> field:
+
+mv              matrix-vector product
+sv              solving a system of linear equations with a single unknown vector
+r               rank-1 update of a matrix
+r2              rank-2 update of a matrix.
+
+BLAS level 3 names can have the following characters in the <mod> field:
+
+mm              matrix-matrix product
+sm              solving a system of linear equations with multiple unknown vectors
+rk              rank-k update of a matrix
+r2k             rank-2k update of a matrix.
+
+The examples below illustrate how to interpret BLAS routine names:
+
+ddot
+<d> <dot>: double-precision real vector-vector dot product
+cdotc
+<c> <dot> <c>: complex vector-vector dot product, conjugated
+scasum
+<sc> <asum>: sum of magnitudes of vector elements, single precision real output and single precision complex input
+cdotu
+<c> <dot> <u>: vector-vector dot product, unconjugated, complex
+sgemv
+<s> <ge> <mv>: matrix-vector product, general matrix, single precision
+ztrmm
+<z> <tr> <mm>: matrix-matrix product, triangular matrix, double-precision complex.
+
+Sparse BLAS level 1 naming conventions are similar to those of BLAS level 1.
