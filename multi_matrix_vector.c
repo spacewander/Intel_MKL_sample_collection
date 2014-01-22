@@ -51,13 +51,14 @@ int main()
     size = P;
     for (i = 0; i < size; ++i)
     {
+
         printf("%d\t",C[i]);
         if (i % 5 == 4)
         {
             printf("\n");
         }
+    
     }
-
     mkl_free(A);
     mkl_free(B);
     mkl_free(C);
