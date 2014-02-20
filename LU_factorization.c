@@ -1,3 +1,9 @@
+/*
+ * warning! This program using int instead of size_t as the size of matrix.
+ * It will save your time in malloc memory without any impact when the matrix is not huge.
+ * But if the matrix is too huge (for example, more than 30000 rows and 30000 cols), this wil cause trouble.
+ * Of course, you can change the ints to size_ts if needed.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <mkl.h>
@@ -26,11 +32,24 @@ int main(int argc, char *argv[])
 	const int nb = 256;
 	
     float *c = (float *)( mkl_malloc((m*n) * sizeof(float),64));
+    if (c == NULL)
+    {
+        printf("LU factorization failed. The matrix is too huge!\n");
+        mkl_free(c);
+        return 0;
+        
+    }
 	// initialize matrix c
 	Init(m,c);
 
 
     float *temp3 = ( float *)( mkl_malloc((m*n) * sizeof(float),64));
+    if (temp3 == NULL)
+    {
+        printf("LU factorization failed.  The matrix is too huge!\n");
+        mkl_free(c);
+        return 0;
+    }
 	int i,i1,i2,j,k;
 
     // case 1, the matrix is small enough
